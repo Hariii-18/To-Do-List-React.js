@@ -1,0 +1,222 @@
+/* Page layout */
+.body {
+    width: 100%;
+    min-height: 100vh;
+    background: #f4f6f8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Title */
+.body h1 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Input box */
+.input-box {
+    width: 280px;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    margin-bottom: 10px;
+}
+
+.input-box:focus {
+    border-color: #007bff;
+}
+
+
+
+/* Add button */
+.top>button {
+    padding: 10px 18px;
+    font-size: 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    gap:25px;
+}
+
+.body>button:hover {
+    background-color: #0056b3;
+}
+
+/* List */
+ol {
+    width: 100%;
+    max-width: 500px;
+    padding-left: 0;
+    counter-reset: task-counter;
+}
+
+/* Each task item */
+.list-item {
+    counter-increment: task-counter;
+    position: relative;
+    padding-left: 35px;
+
+    list-style: none;
+    background: #ffffff;
+    padding: 12px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Number before each task */
+.list-item::before {
+    content: counter(task-counter) ".";
+    position: absolute;
+    left: 10px;
+    font-weight: bold;
+    color: #555;
+}
+
+
+/* Important task */
+.list-item.important {
+    border-left: 6px solid goldenrod;
+    background: #fff9e6;
+}
+
+/* Task text */
+.task-text {
+    flex: 1;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Completed task */
+.task-text.completed {
+    text-decoration: line-through;
+    color: #999;
+}
+
+/* Buttons inside list */
+.list-item button {
+    padding: 6px 10px;
+    font-size: 13px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Complete / Undo button */
+.list-item button:nth-child(2) {
+    background-color: #28a745;
+    color: white;
+}
+
+.list-item button:nth-child(2):hover {
+    background-color: #1e7e34;
+}
+
+/* Star / Unstar button */
+.list-item button:nth-child(3) {
+    background-color: goldenrod;
+    color: white;
+}
+
+.list-item button:nth-child(3):hover {
+    background-color: #c69500;
+}
+
+/* Delete button */
+.list-item button:nth-child(4) {
+    background-color: #dc3545;
+    color: white;
+}
+
+.list-item button:nth-child(4):hover {
+    background-color: #b02a37;
+}
+
+
+/* Responsive Styling */
+
+/* Tablets & small laptops */
+@media (max-width: 768px) {
+
+    .body {
+        padding: 30px 15px;
+    }
+
+    .input-box {
+        width: 220px;
+        font-size: 15px;
+    }
+
+    ol {
+        max-width: 100%;
+    }
+
+    .list-item {
+        padding: 10px;
+        padding-left: 32px;
+        gap: 6px;
+    }
+
+    .task-text {
+        font-size: 15px;
+    }
+
+    .list-item button {
+        font-size: 12px;
+        padding: 5px 8px;
+    }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+
+    .body h1 {
+        font-size: 22px;
+    }
+
+    /* Input + Add button stack nicely */
+    .top {
+        width: 100%;
+        display: flex;
+        gap: 8px;
+    }
+
+    .input-box {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .top>button {
+        padding: 10px 14px;
+        font-size: 14px;
+    }
+
+    /* Task items wrap instead of overflowing */
+    .list-item {
+        flex-wrap: wrap;
+        align-items: flex-start;
+        padding-left: 30px;
+    }
+
+    .task-text {
+        width: 100%;
+        margin-bottom: 6px;
+    }
+
+    /* Buttons align neatly */
+    .list-item button {
+        font-size: 12px;
+        padding: 6px 8px;
+    }
+}
