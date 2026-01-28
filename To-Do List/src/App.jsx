@@ -54,7 +54,7 @@ function Todo() {
                     placeholder="Enter your task"
                 />
 
-                <button onClick={addTask}>Add</button>
+                <button className="add-btn" onClick={addTask}>Add</button>
             </div>
 
             <ol>
