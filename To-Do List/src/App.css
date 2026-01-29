@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 /* Page layout */
 .body {
     width: 100%;
@@ -19,12 +23,14 @@
 /* Input box */
 .input-box {
     width: 280px;
-    padding: 10px;
+    height: 42px;
+    padding: 0 12px;
     font-size: 16px;
     border: 2px solid #ccc;
     border-radius: 6px;
     outline: none;
     margin-bottom: 10px;
+    /* margin-bottom: 10px; */
 }
 
 .input-box:focus {
@@ -39,10 +45,25 @@
 }
 
 .add-btn {
+    height: 42px;
+    /* ✅ SAME HEIGHT */
+    padding: 0 20px;
+    font-size: 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    /* ✅ CENTER TEXT */
     align-items: center;
-    flex-direction: column;
-    padding: 10px;
+    justify-content: center;
     margin-bottom: 10px;
+    /* margin-bottom: 0px; */
+}
+
+.add-btn:hover {
+    background-color: #0056b3;
 }
 
 /* Add button */
@@ -54,7 +75,7 @@
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
     gap: 25px;
 }
 
@@ -74,8 +95,7 @@ ol {
 .list-item {
     counter-increment: task-counter;
     position: relative;
-    padding-left: 56px;
-
+    padding: 12px 12px 12px 72px;
     list-style: none;
     background: #ffffff;
     padding: 12px;
@@ -91,7 +111,9 @@ ol {
 .list-item::before {
     content: counter(task-counter) ".";
     position: absolute;
-    left: 20px;
+    left: 16px;
+    width: 40px;
+    font-size: 16px;
     font-weight: bold;
     color: #555;
     top: 50%;
@@ -110,6 +132,7 @@ ol {
     flex: 1;
     font-size: 16px;
     color: #333;
+    padding-left: 20px;
 }
 
 /* Completed task */
@@ -170,6 +193,11 @@ ol {
     .input-box {
         width: 220px;
         font-size: 15px;
+        margin-bottom: 10px;
+    }
+
+    .top>button {
+        margin-bottom: 10px;
     }
 
     ol {
@@ -184,6 +212,7 @@ ol {
 
     .task-text {
         font-size: 15px;
+        padding-left: 0px;
     }
 
     .list-item button {
@@ -209,30 +238,31 @@ ol {
     /* Input + Add button stack nicely */
     .top {
         width: 100%;
-        display: flex;
-        gap: 8px;
+        /* display: flex;
+        gap: 8px; */
     }
 
     .input-box {
         width: 100%;
-        font-size: 14px;
+        /* font-size: 14px; */
     }
 
     .top>button {
         padding: 10px 14px;
         font-size: 14px;
+        margin-bottom: 0px;
     }
 
     /* Task items wrap instead of overflowing */
     .list-item {
         flex-wrap: wrap;
-        
         padding-left: 42px;
     }
 
     .task-text {
         width: 100%;
         margin-bottom: 6px;
+        padding-left: 0px;
     }
 
     /* Buttons align neatly */
@@ -250,6 +280,7 @@ ol {
         align-items: center;
         flex-direction: column;
         padding: 10px;
+        border-bottom: 0px;
         margin-bottom: 10px;
     }
 }

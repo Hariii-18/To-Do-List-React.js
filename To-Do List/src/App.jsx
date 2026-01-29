@@ -50,6 +50,7 @@ function Todo() {
                 <input className="input-box"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && addTask()}
                     type="text"
                     placeholder="Enter your task"
                 />
