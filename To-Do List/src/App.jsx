@@ -1,9 +1,22 @@
-import React, { useState } from "react";
-import "./App.css"
+import React, { useState, useEffect } from "react";
+import "./App.css";
 
 function Todo() {
-    const [tasks, setTasks] = useState([]); //tasks stores all the items in a list , setTasks updates the list
+    const [tasks, setTasks] = useState(() => {
+        const saved = localStorage.getItem("tasks");
+        return saved ? JSON.parse(saved) : [];
+    });
+    //tasks stores all the items in a list , setTasks updates the list
     const [input, setInput] = useState("");
+    const [filter, setFilter] = useState("all");
+    const [darkMode, setDarkMode] = useState(() => {
+        const savedMode = localStorage.getItem("darkMode");
+        return savedMode === "true";
+    });
+    const toggleDarkMode = () => {
+        setDarkMode(prev => !prev);
+    };
+
 
     const addTask = () => {
         if (!input.trim()) return;
@@ -43,9 +56,41 @@ function Todo() {
         );
     };
 
+    // Local Storage 
+    useEffect(() => {
+        const savedTasks = JSON.parse(localStorage.getItem("tasks"));
+        if (savedTasks) {
+            setTasks(savedTasks);
+        }
+    }, []);
+
+    // Filter Logic
+    const filteredTasks = tasks.filter(task => {
+        if (filter === "completed") return task.completed;
+        if (filter === "important") return task.important;
+        return true;
+    });
+
+    // Dark Mode Toggle
+    useEffect(() => {
+        localStorage.setItem("darkMode", darkMode);
+    }, [darkMode]);
+
+
+    useEffect(() => {
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+    }, [tasks]);
+
     return (
-        <div className="body">
+        <div className={`body ${darkMode ? "dark" : "light"}`}>
+            <div className="head">
             <h1>TO-DO List</h1>
+            
+            <button className="dark-toggle" onClick={toggleDarkMode}>
+                {darkMode ? "☀ Light Mode" : "🌙 Dark Mode"}
+            </button>
+            </div>
+
             <div className="top">
                 <input className="input-box"
                     value={input}
@@ -59,7 +104,7 @@ function Todo() {
             </div>
 
             <ol>
-                {tasks.map(task => (
+                {filteredTasks.map(task => (
                     <li
                         key={task.id}
                         className={`list-item ${task.important ? "important" : ""}`}
@@ -70,23 +115,49 @@ function Todo() {
                             {task.text}
                         </span>
 
-                        <button onClick={() => completeTask(task.id)}>
+                        <button className="complete-btn"
+                            onClick={() => completeTask(task.id)}
+                            aria-label="Mark task completed">
                             {task.completed ? "Undo" : "Completed"}
                         </button>
 
                         <button
                             className="star-btn"
-                            onClick={() => importantTask(task.id)}
-                        >
+                            aria-label="Mark task important"
+                            onClick={() => importantTask(task.id)
+                            }>
                             {task.important ? "★" : "☆"}
                         </button>
 
-                        <button onClick={() => deleteTask(task.id)}>
+                        <button className="delete-btn"
+                            aria-label="Delete task"
+                            onClick={() => deleteTask(task.id)
+                            }>
                             Delete
                         </button>
                     </li>
                 ))}
             </ol>
+            <div className="filters">
+                <button
+                    className={filter === "all" ? "active" : ""}
+                    onClick={() => setFilter("all")}
+                >
+                    All
+                </button>
+                <button
+                    className={filter === "completed" ? "active" : ""}
+                    onClick={() => setFilter("completed")}
+                >
+                    Completed
+                </button>
+                <button
+                    className={filter === "important" ? "active" : ""}
+                    onClick={() => setFilter("important")}
+                >
+                    Important
+                </button>
+            </div>
         </div>
     );
 }

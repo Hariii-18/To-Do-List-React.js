@@ -12,6 +12,42 @@
     align-items: center;
     padding: 40px 20px;
     font-family: Arial, Helvetica, sans-serif;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.body.light {
+    background-color: #f4f6f8;
+    color: #000;
+}
+
+.body.dark {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.body.dark input,
+.body.dark button {
+    background-color: #1e1e1e;
+    color: #fff;
+    border: 1px solid #444;
+}
+
+.body.dark .list-item {
+    background-color: #1a1a1a;
+}
+
+.dark-toggle {
+    margin-bottom: 15px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    font-weight: 600;
+}
+
+.head{
+    display: flex;
+    gap: 30px;
 }
 
 /* Title */
@@ -151,33 +187,55 @@ ol {
 }
 
 /* Complete / Undo button */
-.list-item button:nth-child(2) {
+.complete-btn {
     background-color: #28a745;
     color: white;
 }
 
-.list-item button:nth-child(2):hover {
+.complete-btn:hover {
     background-color: #1e7e34;
 }
 
 /* Star / Unstar button */
-.list-item button:nth-child(3) {
+.star-btn {
     background-color: goldenrod;
     color: white;
 }
 
-.list-item button:nth-child(3):hover {
+.star-btn:hover {
     background-color: #c69500;
 }
 
 /* Delete button */
-.list-item button:nth-child(4) {
+.delete-btn {
     background-color: #dc3545;
     color: white;
 }
 
-.list-item button:nth-child(4):hover {
+.delete-btn:hover {
     background-color: #b02a37;
+}
+
+/* Filter buttons */
+.filters {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.filters button {
+    padding: 6px 14px;
+    border-radius: 6px;
+    border: 1px solid #007bff;
+    background: white;
+    color: #007bff;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.filters button.active {
+    background: #007bff;
+    color: white;
 }
 
 
@@ -238,13 +296,10 @@ ol {
     /* Input + Add button stack nicely */
     .top {
         width: 100%;
-        /* display: flex;
-        gap: 8px; */
     }
 
     .input-box {
         width: 100%;
-        /* font-size: 14px; */
     }
 
     .top>button {
